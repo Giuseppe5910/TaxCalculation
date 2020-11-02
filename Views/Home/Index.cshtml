@@ -1,0 +1,52 @@
+﻿@model TaxCalculatorGlobalBlue.Models.TaxInput
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="row">
+    @using (Html.BeginForm("Calculate", "Home"))
+    {
+        @Html.ValidationSummary()
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.VAT)
+            <br /><br />
+            <div class="radio-inline">
+                @Html.RadioButtonFor(m => m.VAT, 10, new { @class = "form-control" })
+            </div>
+            <label>10%</label>
+            <div class="radio-inline">
+                @Html.RadioButtonFor(m => m.VAT, 13, new { @class = "form-control" })
+            </div>
+            <label>13%</label>
+            <div class="radio-inline">
+                @Html.RadioButtonFor(m => m.VAT, 20, new { @class = "form-control" })
+            </div>
+            <label>20%</label>
+            <br />
+            <br />
+            <br />
+            @Html.ValidationMessageFor(m => m.VAT)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Gross)
+            @Html.TextBoxFor(m => m.Gross, new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Net)
+            @Html.TextBoxFor(m => m.Net, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Total)
+            @Html.TextBoxFor(m => m.Total, new { @class = "form-control" })
+        </div>
+        @Html.HiddenFor(m => m.Id)
+        <button type="submit" class="btn btn-primary">Calculate</button>
+
+    }
+</div>

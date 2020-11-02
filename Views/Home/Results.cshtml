@@ -1,0 +1,34 @@
+﻿@model TaxCalculatorGlobalBlue.Models.TaxInput
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Results</h2>
+<div id="mainDiv">
+    <br />
+    <label id="VAT"></label>
+    <br />
+    <label id="Gross"></label>
+    <br />
+    <label id="Net"></label>
+    <br />
+    <label id="Total"></label>
+    <br />
+
+    @Html.ActionLink("Reset", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+</div>
+
+@section scripts{
+    <script>
+        //As soon get back resharper change the 
+        //the gross for net and give it a meaning name!!!
+        document.addEventListener("DOMContentLoaded", function () {
+            $.get('/api/calculation/@Model.Id', function (data) {
+                document.getElementById('VAT').innerHTML = "Vat rate:  " + data.VAT + "%";
+                document.getElementById('Gross').innerHTML = "Value without tax:  " + data.Gross;
+                document.getElementById('Net').innerHTML = "Added tax value:  " + data.Net;
+                document.getElementById('Total').innerHTML = "Total value:  " + data.Total;
+            }, "json")
+        });
+    </script>
+}
